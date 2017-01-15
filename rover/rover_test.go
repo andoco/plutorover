@@ -3,7 +3,7 @@ package rover
 import (
 	"testing"
 
-	"github.com/andoco/plutorover/terrain"
+	"github.com/andoco/plutorover/grid"
 )
 
 func TestNew(t *testing.T) {
@@ -17,68 +17,68 @@ func TestNew(t *testing.T) {
 		t.Errorf("expected position (0,0), got (%d, %d)", rover.Pos.X, rover.Pos.Y)
 	}
 
-	if rover.Heading != terrain.CardinalNorth {
-		t.Errorf("expected heading %d, got %d", terrain.CardinalNorth, rover.Heading)
+	if rover.Heading != grid.CardinalNorth {
+		t.Errorf("expected heading %d, got %d", grid.CardinalNorth, rover.Heading)
 	}
 }
 
 func TestMovement(t *testing.T) {
 	testCases := []struct {
-		startPos     terrain.Pos
-		startHeading terrain.Cardinal
-		endPos       terrain.Pos
-		endHeading   terrain.Cardinal
+		startPos     grid.Pos
+		startHeading grid.Cardinal
+		endPos       grid.Pos
+		endHeading   grid.Cardinal
 		cmd          string
 		name         string
 	}{
 		{
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{0, 1},
-			terrain.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{0, 1},
+			grid.CardinalNorth,
 			"F",
 			"Forward from origin",
 		}, {
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{0, 2},
-			terrain.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{0, 2},
+			grid.CardinalNorth,
 			"FF",
 			"Forward two times",
 		}, {
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{0, -1},
-			terrain.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{0, -1},
+			grid.CardinalNorth,
 			"B",
 			"Backward from origin",
 		}, {
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{0, 0},
-			terrain.CardinalWest,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalWest,
 			"L",
 			"Rotate left from north",
 		}, {
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{0, 0},
-			terrain.CardinalEast,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalEast,
 			"R",
 			"Rotate right from north",
 		}, {
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{-1, 1},
-			terrain.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{-1, 1},
+			grid.CardinalNorth,
 			"LFRF",
 			"Rotating and moving forward",
 		},
 		{
-			terrain.Pos{0, 0},
-			terrain.CardinalNorth,
-			terrain.Pos{1, -1},
-			terrain.CardinalNorth,
+			grid.Pos{0, 0},
+			grid.CardinalNorth,
+			grid.Pos{1, -1},
+			grid.CardinalNorth,
 			"LBRB",
 			"Rotating and moving backward",
 		},

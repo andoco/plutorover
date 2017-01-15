@@ -1,11 +1,11 @@
 package rover
 
-import "github.com/andoco/plutorover/terrain"
+import "github.com/andoco/plutorover/grid"
 
 // R is a struct for a commandable rover vehicle.
 type R struct {
-	Pos     terrain.Pos
-	Heading terrain.Cardinal
+	Pos     grid.Pos
+	Heading grid.Cardinal
 }
 
 // Process will execute a command string on the rover.
@@ -34,17 +34,17 @@ func (r *R) forward() {
 	y := 0
 
 	switch r.Heading {
-	case terrain.CardinalNorth:
+	case grid.CardinalNorth:
 		y = 1
-	case terrain.CardinalEast:
+	case grid.CardinalEast:
 		x = 1
-	case terrain.CardinalSouth:
+	case grid.CardinalSouth:
 		y = -1
-	case terrain.CardinalWest:
+	case grid.CardinalWest:
 		x = -1
 	}
 
-	r.Pos = terrain.Pos{r.Pos.X + x, r.Pos.Y + y}
+	r.Pos = grid.Pos{r.Pos.X + x, r.Pos.Y + y}
 }
 
 func (r *R) backward() {
@@ -52,25 +52,25 @@ func (r *R) backward() {
 	y := 0
 
 	switch r.Heading {
-	case terrain.CardinalNorth:
+	case grid.CardinalNorth:
 		y = -1
-	case terrain.CardinalEast:
+	case grid.CardinalEast:
 		x = -1
-	case terrain.CardinalSouth:
+	case grid.CardinalSouth:
 		y = 1
-	case terrain.CardinalWest:
+	case grid.CardinalWest:
 		x = 1
 	}
 
-	r.Pos = terrain.Pos{r.Pos.X + x, r.Pos.Y + y}
+	r.Pos = grid.Pos{r.Pos.X + x, r.Pos.Y + y}
 }
 
 func (r *R) turnLeft() {
-	r.Heading = terrain.RotateLeft(r.Heading)
+	r.Heading = grid.RotateLeft(r.Heading)
 }
 
 func (r *R) turnRight() {
-	r.Heading = terrain.RotateRight(r.Heading)
+	r.Heading = grid.RotateRight(r.Heading)
 }
 
 // New creates and returns a new rover vehicle.

@@ -1,4 +1,4 @@
-package terrain
+package grid
 
 import "testing"
 
