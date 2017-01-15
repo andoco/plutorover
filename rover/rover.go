@@ -13,6 +13,8 @@ func (r *R) Process(cmd string) error {
 	switch cmd {
 	case "F":
 		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y + 1}
+	case "B":
+		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y - 1}
 	}
 	return nil
 }
