@@ -24,17 +24,11 @@ func (r *R) Process(cmd string) error {
 }
 
 func (r *R) turnLeft() {
-	switch r.Heading {
-	case terrain.CardinalNorth:
-		r.Heading = terrain.CardinalWest
-	}
+	r.Heading = terrain.RotateLeft(r.Heading)
 }
 
 func (r *R) turnRight() {
-	switch r.Heading {
-	case terrain.CardinalNorth:
-		r.Heading = terrain.CardinalEast
-	}
+	r.Heading = terrain.RotateRight(r.Heading)
 }
 
 // New creates and returns a new rover vehicle.
