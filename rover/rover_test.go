@@ -24,14 +24,18 @@ func TestNew(t *testing.T) {
 
 func TestMovement(t *testing.T) {
 	testCases := []struct {
-		startPos terrain.Pos
-		endPos   terrain.Pos
-		cmd      string
-		name     string
+		startPos     terrain.Pos
+		startHeading terrain.Cardinal
+		endPos       terrain.Pos
+		endHeading   terrain.Cardinal
+		cmd          string
+		name         string
 	}{
 		{
 			terrain.Pos{0, 0},
+			terrain.CardinalNorth,
 			terrain.Pos{0, 1},
+			terrain.CardinalNorth,
 			"F",
 			"Forward from origin",
 		},
@@ -46,6 +50,10 @@ func TestMovement(t *testing.T) {
 
 			if rover.Pos != tc.endPos {
 				t.Errorf("expected position %v, got %v", tc.endPos, rover.Pos)
+			}
+
+			if rover.Heading != tc.endHeading {
+				t.Errorf("expected heading %v, got %v", tc.endHeading, rover.Heading)
 			}
 		})
 	}
