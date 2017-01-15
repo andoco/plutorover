@@ -4,6 +4,7 @@ import "github.com/andoco/plutorover/grid"
 
 // R is a struct for a commandable rover vehicle.
 type R struct {
+	Grid    *grid.G
 	Pos     grid.Pos
 	Heading grid.Cardinal
 }
@@ -74,6 +75,6 @@ func (r *R) turnRight() {
 }
 
 // New creates and returns a new rover vehicle.
-func New() *R {
-	return &R{}
+func New(grid *grid.G) *R {
+	return &R{Grid: grid}
 }

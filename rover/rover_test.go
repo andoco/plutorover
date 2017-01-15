@@ -7,10 +7,15 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	rover := New()
+	g := &grid.G{5, 5}
+	rover := New(g)
 
 	if rover == nil {
 		t.Fatal("expected rover, got nil")
+	}
+
+	if rover.Grid != g {
+		t.Errorf("expected %v, got %v", g, rover.Grid)
 	}
 
 	if rover.Pos.X != 0 || rover.Pos.Y != 0 {
@@ -86,7 +91,8 @@ func TestMovement(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			rover := New()
+			grid := &grid.G{5, 5}
+			rover := New(grid)
 			rover.Pos = tc.startPos
 
 			rover.Process(tc.cmd)

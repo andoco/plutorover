@@ -18,6 +18,12 @@ const (
 	CardinalWest
 )
 
+// G is a struct for a 2D grid.
+type G struct {
+	Width  int
+	Height int
+}
+
 func RotateLeft(dir Cardinal) Cardinal {
 	switch dir {
 	case CardinalNorth:
