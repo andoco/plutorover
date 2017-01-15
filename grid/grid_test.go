@@ -3,6 +3,8 @@ package grid
 import "testing"
 
 func TestTranslate(t *testing.T) {
+	g := &G{5, 5}
+
 	testCases := []struct {
 		inPos  Pos
 		deltaX int
@@ -11,14 +13,16 @@ func TestTranslate(t *testing.T) {
 		name   string
 	}{
 		{Pos{0, 0}, 1, 0, Pos{1, 0}, "positive x"},
-		{Pos{0, 0}, -1, 0, Pos{-1, 0}, "negative x"},
+		{Pos{1, 0}, -1, 0, Pos{0, 0}, "negative x"},
 		{Pos{0, 0}, 0, 1, Pos{0, 1}, "positive y"},
-		{Pos{0, 0}, 0, -1, Pos{0, -1}, "negative y"},
+		{Pos{0, 1}, 0, -1, Pos{0, 0}, "negative y"},
 		{Pos{0, 0}, 1, 1, Pos{1, 1}, "x and y"},
 		{Pos{1, 1}, 0, 0, Pos{1, 1}, "zero delta"},
+		{Pos{0, 0}, g.Width, 0, Pos{0, 0}, "wrap positive x"},
+		{Pos{0, 0}, -1, 0, Pos{g.Width - 1, 0}, "wrap negative x"},
+		{Pos{0, 0}, 0, g.Height, Pos{0, 0}, "wrap positive y"},
+		{Pos{0, 0}, 0, -1, Pos{0, g.Height - 1}, "wrap negative y"},
 	}
-
-	g := &G{5, 5}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
