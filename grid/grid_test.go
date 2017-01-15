@@ -18,9 +18,9 @@ func TestTranslate(t *testing.T) {
 		{Pos{0, 1}, 0, -1, Pos{0, 0}, "negative y"},
 		{Pos{0, 0}, 1, 1, Pos{1, 1}, "x and y"},
 		{Pos{1, 1}, 0, 0, Pos{1, 1}, "zero delta"},
-		{Pos{0, 0}, g.Width, 0, Pos{0, 0}, "wrap positive x"},
+		{Pos{g.Width - 1, 0}, 1, 0, Pos{0, 0}, "wrap positive x"},
 		{Pos{0, 0}, -1, 0, Pos{g.Width - 1, 0}, "wrap negative x"},
-		{Pos{0, 0}, 0, g.Height, Pos{0, 0}, "wrap positive y"},
+		{Pos{0, g.Height - 1}, 0, 1, Pos{0, 0}, "wrap positive y"},
 		{Pos{0, 0}, 0, -1, Pos{0, g.Height - 1}, "wrap negative y"},
 	}
 
