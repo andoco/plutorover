@@ -19,14 +19,50 @@ func (r *R) Process(commands string) error {
 func (r *R) interpret(cmd string) {
 	switch cmd {
 	case "F":
-		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y + 1}
+		r.forward()
 	case "B":
-		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y - 1}
+		r.backward()
 	case "L":
 		r.turnLeft()
 	case "R":
 		r.turnRight()
 	}
+}
+
+func (r *R) forward() {
+	x := 0
+	y := 0
+
+	switch r.Heading {
+	case terrain.CardinalNorth:
+		y = 1
+	case terrain.CardinalEast:
+		x = 1
+	case terrain.CardinalSouth:
+		y = -1
+	case terrain.CardinalWest:
+		x = -1
+	}
+
+	r.Pos = terrain.Pos{r.Pos.X + x, r.Pos.Y + y}
+}
+
+func (r *R) backward() {
+	x := 0
+	y := 0
+
+	switch r.Heading {
+	case terrain.CardinalNorth:
+		y = -1
+	case terrain.CardinalEast:
+		x = -1
+	case terrain.CardinalSouth:
+		y = 1
+	case terrain.CardinalWest:
+		x = 1
+	}
+
+	r.Pos = terrain.Pos{r.Pos.X + x, r.Pos.Y + y}
 }
 
 func (r *R) turnLeft() {
