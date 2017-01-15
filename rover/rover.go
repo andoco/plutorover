@@ -17,6 +17,8 @@ func (r *R) Process(cmd string) error {
 		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y - 1}
 	case "L":
 		r.turnLeft()
+	case "R":
+		r.turnRight()
 	}
 	return nil
 }
@@ -25,6 +27,13 @@ func (r *R) turnLeft() {
 	switch r.Heading {
 	case terrain.CardinalNorth:
 		r.Heading = terrain.CardinalWest
+	}
+}
+
+func (r *R) turnRight() {
+	switch r.Heading {
+	case terrain.CardinalNorth:
+		r.Heading = terrain.CardinalEast
 	}
 }
 
