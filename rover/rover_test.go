@@ -41,6 +41,13 @@ func TestMovement(t *testing.T) {
 		}, {
 			terrain.Pos{0, 0},
 			terrain.CardinalNorth,
+			terrain.Pos{0, 2},
+			terrain.CardinalNorth,
+			"FF",
+			"Forward two times",
+		}, {
+			terrain.Pos{0, 0},
+			terrain.CardinalNorth,
 			terrain.Pos{0, -1},
 			terrain.CardinalNorth,
 			"B",

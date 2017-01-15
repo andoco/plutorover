@@ -9,7 +9,14 @@ type R struct {
 }
 
 // Process will execute a command string on the rover.
-func (r *R) Process(cmd string) error {
+func (r *R) Process(commands string) error {
+	for _, cmd := range commands {
+		r.interpret(string(cmd))
+	}
+	return nil
+}
+
+func (r *R) interpret(cmd string) {
 	switch cmd {
 	case "F":
 		r.Pos = terrain.Pos{r.Pos.X, r.Pos.Y + 1}
@@ -20,7 +27,6 @@ func (r *R) Process(cmd string) error {
 	case "R":
 		r.turnRight()
 	}
-	return nil
 }
 
 func (r *R) turnLeft() {
