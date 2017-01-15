@@ -45,7 +45,7 @@ func (r *R) forward() {
 		x = -1
 	}
 
-	r.Pos = grid.Pos{r.Pos.X + x, r.Pos.Y + y}
+	r.Pos = r.Grid.Translate(r.Pos, x, y)
 }
 
 func (r *R) backward() {
@@ -63,7 +63,7 @@ func (r *R) backward() {
 		x = 1
 	}
 
-	r.Pos = grid.Pos{r.Pos.X + x, r.Pos.Y + y}
+	r.Pos = r.Grid.Translate(r.Pos, x, y)
 }
 
 func (r *R) turnLeft() {

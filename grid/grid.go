@@ -24,6 +24,12 @@ type G struct {
 	Height int
 }
 
+// Translate will move a point on the grid by amounts specified by x and y, while
+// wrapping to remain within the grid.
+func (g *G) Translate(p Pos, x, y int) Pos {
+	return Pos{p.X + x, p.Y + y}
+}
+
 func RotateLeft(dir Cardinal) Cardinal {
 	switch dir {
 	case CardinalNorth:
